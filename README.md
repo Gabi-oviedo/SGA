@@ -80,8 +80,7 @@ Próximamente:
 
 
 
-Nombre del estudiante
-
+Gabriel Oviedo
 
 
 Programación IV
