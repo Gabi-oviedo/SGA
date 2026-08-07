@@ -1,62 +1,90 @@
-const alumnos = [
+/* const alumnos = [
     {
         id: 1,
-        nombre: "José"
+        nombre: "Ana"
     },
     {
         id: 2,
-        nombre: "Jerardo"
-    },
-    {
-        id: 3,
-        nombre: "Jamez"
+        nombre: "José"
     }
 ];
-
-function obtenerAlumnos() {
+function obtenerAlumnos(){
     return new Promise((resolve) => {
         setTimeout(() => {
-            resolve(alumnos);
-        }, 3000);
+            resolve(alumnos)
+        }, 2000);
     })
 }
-
-obtenerAlumnos().then((e) => {
-    console.log(e);
-})
-
-async function iniciar() {
-    const datos = await obtenerAlumnos();
-    console.log(datos);
+async function iniciar(){
+    const datos = await obtenerAlumnos()
+    console.table(datos)
 }
+iniciar(); */
 
-iniciar();
-
-
-
-// Crear obtenerMaterias() y obtenerDocentes() para luego mostrar los datos a travez de async/await
-
-function obtenerMaterias() {
+//crear obtenerMaterias()
+/* const materias = [
+    {
+        id: 1,
+        nombre: "matematica"
+    },
+    {
+        id: 2,
+        nombre: "ingles"
+    }
+];
+function obtenerMaterias(){
     return new Promise((resolve) => {
         setTimeout(() => {
-            resolve(["Matematicas", "Geografia", "Ingles"]);
-        }, 3000);
+            resolve(materias)
+        }, 2000);
     })
 }
-
-function obtenerDocentes() {
+async function iniciar(){
+    const datos = await obtenerMaterias()
+    console.table(datos)
+}
+iniciar(); */
+//crear obtenerDocentes()
+/* const docentes = [
+    {
+        id: 1,
+        nombre: "profesor"
+    },
+    {
+        id: 2,
+        nombre: "profesora"
+    }
+];
+function obtenerDocentes(){
     return new Promise((resolve) => {
         setTimeout(() => {
-            resolve(["Mariela", "Cristina", "Segio"]);
-        }, 3000);
+            resolve(docentes)
+        }, 2000);
     })
 }
+async function iniciar(){
+    const datos = await obtenerDocentes()
+    console.table(datos)
+}
+iniciar(); */
+//mostrar los datos a traves de async o await
 
-async function iniciar() {
-    const materias = await obtenerMaterias();
-    const profesores = await obtenerDocentes();
-    console.log(materias);
-    console.log(profesores);
+async function obtenerAlumnos(){
+    const respuesta =  await fetch ("https://jsonplaceholder.typicode.com/users")
+    const alumnos = await respuesta.json()
+    return alumnos
 }
 
-iniciar();
+function mostrarAlumnos(alumnos){
+    /* console.table(alumnos)
+    console.log(alumnos[0].id) */
+    for (const alumno of alumnos){
+        console.log(alumno.name, alumno.email)
+    }
+}
+
+async function iniciar(){
+    const alumnos = await obtenerAlumnos()
+    mostrarAlumnos(alumnos)
+}
+iniciar()
