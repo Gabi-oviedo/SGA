@@ -97,3 +97,32 @@ th{
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
     z-index: 1000;
 }
+
+.btn-editar, .btn-eliminar {
+    padding: 8px 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 0 3px;
+    border-radius: 6px;
+}
+
+.btn-editar {
+    background-color: #f4f59f;
+    color: rgb(122, 124, 8);
+}
+
+.btn-eliminar {
+    background-color: #f3ab9f;
+    color: rgb(226, 39, 39);
+}
+
+.btn-editar:hover {
+    background-color: #f59e0b;
+    color: white;
+}
+
+.btn-eliminar:hover {
+    background-color: #f33131;
+    color: white;
+}
