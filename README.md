@@ -1,26 +1,14 @@
 # Sistema de Gestión Académica (SGA)
-
-
-
 Proyecto desarrollado durante la materia Programación IV.
 
 
-
 ## Descripción
-
-
-
 El Sistema de Gestión Académica (SGA) es una aplicación web que permitirá administrar alumnos, docentes, cursos y materias.
-
-
 
 Durante el desarrollo del proyecto se incorporarán progresivamente nuevas tecnologías y funcionalidades.
 
 
-
 ## Objetivos
-
-
 
 - Gestionar alumnos.
 
@@ -37,26 +25,16 @@ Durante el desarrollo del proyecto se incorporarán progresivamente nuevas tecno
 - Persistir la información en MongoDB.
 
 
-
 ## Tecnologías
-
-
-
 Actualmente:
 
-
-
 - HTML5
-
-
-
-Próximamente:
-
-
 
 - CSS3
 
 - JavaScript
+
+Próximamente:
 
 - React
 
@@ -67,21 +45,14 @@ Próximamente:
 - MongoDB
 
 
-
 ## Estado del proyecto
 
-
-
-- Version: Clase 02 - 04/08/2026
-
-
+- Versión:
+Clase 10- - Estructura actual
 
 ## Autor
-
-
-
 Gabriel Oviedo
 
 
-Programación IV
 
+Programación IV
