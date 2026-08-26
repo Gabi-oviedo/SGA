@@ -1,7 +1,11 @@
-const formulario = document.querySelector("#formularioD")
-const mensaje = document.querySelector("#mensajeDocente")
+const formulario = document.querySelector("#formulario")
+const mensaje = document.querySelector("#mensaje")
 const listaDocentes = document.querySelector("#listaDocentes")
-let docenteEditandoId = null
+let docenteEditandoId = null;
+let docenteEditar = null;
+const btnCancelar = document.querySelector("#btnCancelar")
+btnCancelar.style.display = "none"
+
 
 formulario.addEventListener("submit", function (event) {
     event.preventDefault();
@@ -25,9 +29,9 @@ formulario.addEventListener("submit", function (event) {
         return
     }
 
-    const docentes = obtenerDocentes()
+    const docentes = obtenerAlumnos()
 
-    if (docenteEditandoId === null) {
+    if (DocenteEditandoId === null) {
         const docente = {
             id: Date.now(),
             nombre: nombre,
@@ -35,16 +39,29 @@ formulario.addEventListener("submit", function (event) {
             correo: correo
         }
         docentes.push(docente)
-        mostrarMensaje("Docente guardado correctamente", "mje-exito")
+        mostrarMensaje("docente guardado correctamente", "mje-exito")
     } else {
         const docente = docentes.find(docente => docente.id === docenteEditandoId)
         docente.nombre = nombre
         docente.especialidad = especialidad
         docente.correo = correo
+        const datosActuales = {
+            nombre: nombre,
+            especialidad: especialidad,
+            correo: correo
+        }
+        /* if(datosActuales.nombre === alumnoEditar.nombre && datosActuales.carrera === alumnoEditar.carrera && datosActuales.correo === alumnoEditar.correo){
+            mostrarMensaje("No se han realizado cambios", "mje-error")
+            return
+        } */
+       if(JSON.stringify(datosActuales) === JSON.stringify(docenteEditar)){
+            mostrarMensaje("No se han realizado cambios", "mje-adv")
+            return
+       }
         docenteEditandoId = null
-        formulario.querySelector("button").textContent = "Guardar Docente"
+        formulario.querySelector("button").textContent = "Guardar docente"
 
-        mostrarMensaje("Docente actualizado correctamente", "mje-exito")
+        mostrarMensaje("docente actualizado correctamente", "mje-exito")
     }
     localStorage.setItem("docentes", JSON.stringify(docentes))
     mostraDocentes(docentes)
@@ -53,10 +70,10 @@ formulario.addEventListener("submit", function (event) {
 
 
 function obtenerDocentes() {
-    return obtenerDatos("docentes")
+   return obtenerDatos("docentes")
 }
 
-function mostraDocentes(docentes) {
+function mostrarDocentes(docentes) {
     listaDocentes.innerHTML = ""
     for (const docente of docentes) {
         listaDocentes.innerHTML += `
@@ -89,13 +106,13 @@ function eliminarDocente(id) {
         docente => docente.id !== id
     );
     localStorage.setItem("docentes", JSON.stringify(docentesActualizados))
-    mostraDocentes(docentesActualizados)
+    mostrarDocentes(docentesActualizados)
     if (docenteEditandoId === id){
         formulario.reset()
         docenteEditandoId = null
         formulario.querySelector("button").textContent = "Guardar docente"
     }
-    mostrarMensaje("Docente eliminado correctamente", "mje-exito")
+    mostrarMensaje("docente eliminado correctamente", "mje-exito")
 }
 
 listaDocentes.addEventListener("click", (e) => {
@@ -120,10 +137,26 @@ function editarDocente(id) {
     document.querySelector("#nombre").value = docente.nombre;
     document.querySelector("#especialidad").value = docente.especialidad;
     document.querySelector("#correo").value = docente.correo;
+    docenteEditar = {
+        nombre: docente.nombre,
+        carrera: docente.especialidad,
+        correo: docente.correo
+    }
+    
     docenteEditandoId = id;
-    formulario.querySelector("button").textContent = "Actualizar Docente"
+    btnCancelar.style.display ="inline-block"
+    formulario.querySelector("button").textContent = "Actualizar docente"
     document.querySelector("#nombre").focus()
 }
 
+function CancelarEdicion(){
+    formulario.reset()
+    docenteEditandoId = null;
+    docenteEditar = null;
+    formulario.querySelector("button").textContent = "Guardar docente"
+    btnCancelar.style.display ="none";
+    document.querySelector("#nombre").focus()
+}
+btnCancelar.addEventListener("click", CancelarEdicion)
 const docentes = obtenerDocentes()
-mostraDocentes(docentes)  
+mostrarDocentes(docentes)  

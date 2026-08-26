@@ -4,10 +4,11 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>SGA - Alumnos</title>
-        <script src="js/storage.js" defer></script>
-        <script src="js/docentes.js" defer></script>
-        <script src="js/ui.js" defer></script>
-
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+        <script src="../js/storage.js" defer></script>
+         <script src="../js/docentes.js" defer></script>
+        <script src="../js/ui.js" defer></script>
         <link rel="stylesheet" href="css/estilos.css">
     </head>
     <body>
@@ -15,30 +16,31 @@
             <nav>
                 <a href="index.html">Inicio</a>
                 <a href="alumnos.html">Alumnos</a>
-                <a href="docentes.html">Docentes</a>
+                <a href="docentes.html" class="activo">Docentes</a>
             </nav>
         </header>
         <main>
-            <h1>Gestion de Docentes</h1>
+            <h1>Gestión de Docentes</h1>
             <section class="formulario-container">
-                <h2>Alta de docente</h2>
+                <h2>Alta de Docente</h2>
                 <form id="formulario">
-                    <div class="campo"></div>
-                    <label for="nombre">Nombre</label>
-                    <input type="text" id="nombre"><br><br>
+                    <div class="campo">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" id="nombre">
                     </div>
-                    <div class="campo"></div>
-                    <label for="especialidad">Especialidad</label>
-                    <input type="text" id="especialidad"><br><br>
+                    <div class="campo">
+                        <label for="especialidad">especialidad</label>
+                        <input type="text" id="especialidad">
                     </div>
-                    <div class="campo"></div>
-                    <label for="correo">Correo electrónico</label>
-                    <input type="texto" id="correo"> <br><br>
+                    <div class="campo">
+                        <label for="correo">Correo electrónico</label>
+                        <input type="texto" id="correo">
                     </div>
-
-                    <button type="submit">Guardar Docente</button>
+                    <div class="acciones-form">
+                        <button type="submit" id="btnGuardar">Guardar Docente</button>
+                        <button type="button" id="btnCancelar" class="btn-cancelar">Cancelar</button>
+                    </div>
                 </form>
-                <p id="mensaje" class="oculto"></p>
             </section>
             <section class="lista-container">
                 <h2>docente registrados</h2>
@@ -50,6 +52,7 @@
                             <th>Nombre</th>
                             <th>Especialidad</th>
                             <th>Correo</th>
+                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody id="listaDocentes"></tbody>
