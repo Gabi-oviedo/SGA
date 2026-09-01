@@ -1,3 +1,44 @@
 GET http://localhost:3 000/alumnos
-GET http://localhost:3000/alumnos/2
-GET http://localhost:3000/alumnos/222
+
+###
+GET http://localhost:3000/alumnos
+
+###
+POST http://localhost:3000/alumnos
+Content-Type: application/json
+
+{
+    "id":3,
+    "nombre":"pedofil.Jansic",
+    "carrera":"Papeador"
+}
+
+###
+
+POST http://localhost:3000/alumnos
+Content-Type: application/json
+
+{
+    "id":4,
+    "nombre":"espermadiel",
+    "carrera":"farmeador-de-aura"
+}
+
+###
+
+PUT http://localhost:3000/alumnos
+Content-Type: application/json
+
+{
+    "id":5,
+    "nombre":"Arian",
+    "carrera":"ingenieria en Humo"
+}
+
+###
+
+GET http://localhost:3000/alumnos/
+
+###
+
+DELETE http://localhost:3000/alumnos/2

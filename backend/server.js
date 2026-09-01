@@ -1,6 +1,10 @@
 const express = require("express");
 const app = express();
-const alumnos = [{
+app.use(express.json());
+const alumnosRoutes = require("./routes/alumno.routes")
+app.use("/alumnos", alumnosRoutes)
+
+let alumnos = [{
     id: "1",
     nombre: "Juan",
     carrera: "programacion"
@@ -11,18 +15,13 @@ const alumnos = [{
     carrera: "diseño"
     }
 ]
-app.get("/alumnos" , (req, res) => {
- res.json(alumnos)   
-}
-)
-
-app.get("/alumnos/:id", (req, res) => {
-    const id = Number(req.params.id);
-    const alumno = alumnos.find((a) => a.id === id);
-    res.json(alumno);
+ //creo un middleware
+app.use((req, res, next) => {
+    console.log(req.method);
+    console.log(req.url);
+    next()
 })
 
 app.listen(3000, () => {
   console.log("Server is running on port http://localhost:3000");
 })
-
