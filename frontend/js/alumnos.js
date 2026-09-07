@@ -68,14 +68,9 @@ formulario.addEventListener("submit", function (event) {
     formulario.reset()
 });
 
-
 function obtenerAlumnos() {
    return obtenerDatos("alumnos")
 }
-
-
-
-
 
 function mostraAlumnos(alumnos) {
     listaAlumnos.innerHTML = ""
@@ -104,6 +99,7 @@ function mostraAlumnos(alumnos) {
         `;
     }
 }
+
 function eliminarAlumno(id) {
     const alumnos = obtenerAlumnos()
     const alumnosActualizados = alumnos.filter(
@@ -161,6 +157,7 @@ function CancelarEdicion(){
     btnCancelar.style.display ="none";
     document.querySelector("#nombre").focus()
 }
+
 btnCancelar.addEventListener("click", CancelarEdicion)
 const alumnos = obtenerAlumnos()
 mostraAlumnos(alumnos)  
