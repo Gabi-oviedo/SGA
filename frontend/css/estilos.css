@@ -58,8 +58,6 @@ h2 {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
-
-
 form {
     display: grid;
     gap: 18px;
@@ -78,23 +76,24 @@ form {
 .campo input {
     padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 6px;
     font-size: 16px;
 }
+
 .campo input:focus {
     outline: none;
     border-color: #2563eb;
-    box-shadow: 0 0 0 29x rgba(37, 99, 0235, 0.15);
+    box-shadow: 0 0 0 2px rgba(37, 99, 0235, 0.15);
 }
 
 button {
     padding: 11px 18px;
     border: none;
     border-radius: 6px;
-    cursor: pointer;
     background-color: #2563eb;
     color: white;
     font-size: 15px;
+    cursor: pointer;
 }
 
 button:hover {
@@ -123,9 +122,6 @@ th {
     background-color: #f0f0f0;
 }
 
-.mje-error {
-    background-color: #fee2e2;
-}
 
 .mensaje {
     position: fixed;
@@ -139,12 +135,16 @@ th {
     display: none;
     z-index: 1000;
 }
+.mje-error {
+    background-color: #f39393;
+}
 
 .mje-exito {
     background-color: #16a34a;
 }
-.mje-adv{
-background-color: #fbd523;
+
+.mje-adv {
+    background-color: #f1bd63;
 }
 
 .btn-editar, .btn-eliminar {
@@ -190,8 +190,8 @@ background-color: #fbd523;
 .tarjeta {
     display: block;
     text-decoration: none;
-    background-color: white;
     color: #333;
+    background-color: white;
     padding: 35px 25px;
     border-radius: 12px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
@@ -200,7 +200,7 @@ background-color: #fbd523;
 
 .tarjeta:hover {
     transform: translateY(-4px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
 }
 
 .tarjeta i {
@@ -227,21 +227,15 @@ background-color: #fbd523;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
-.acciones-form{
+.acciones-form {
     display: flex;
     gap: 10px;
 }
 
-.btn-cancelar{
-    background-color: #dc2626;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-.btn-cancelar:hover{
-    background-color: #b91c1c;
+.btn-cancelar {
+    background-color: #6b7280;
 }
 
+.btn-cancelar:hover {
+    background-color: #4b5563;
+}

@@ -7,4 +7,3 @@ function mostrarMensaje(texto, clase) {
         mensaje.style.display = "none"
     }, 3000);
 }
-
