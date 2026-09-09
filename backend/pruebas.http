@@ -1,7 +1,6 @@
 GET http://localhost:3000/alumnos
 
 ###
-
 GET http://localhost:3000/alumnos/2
 
 ###
@@ -9,31 +8,29 @@ POST http://localhost:3000/alumnos
 Content-Type: application/json
 
 {
-    "id": "4",
-    "nombre": "Valentin",
-    "carrera": "BDD"
+    "id": 3,
+    "nombre": "Lucía",
+    "carrera": "Programación"
+}
+###
+PUT http://localhost:3000/alumnos/22
+Content-Type: application/json
+
+{
+    "id": 2,
+    "nombre": "Juan Perez",
+    "carrera": "Programación"
 }
 
 ###
+DELETE http://localhost:3000/alumnos/22
 
+###
 POST http://localhost:3000/alumnos
 Content-Type: application/json
 
 {
-
+    "id": 5,
+    "nombre": "Rocío",
+    "carrera": "Programación"
 }
-
-###
-
-PUT http://localhost:3000/alumnos/4
-Content-Type: application/json
-
-{
-    "id": "5",
-    "nombre": "Lucas",
-    "carrera": "Sistemas"
-}
-
-###
-
-DELETE http://localhost:3000/alumnos/78

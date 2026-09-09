@@ -1,61 +1,70 @@
 const alumnos = require("../data/alumnos")
-function obtenerAlumnos (req, res){
+
+function obtenerAlumnos(req, res){
     res.json(alumnos)
 }
 
-function obtenerAlumno (req, res) {
+function obtenerAlumno(req, res) {
     const id = Number(req.params.id)
     const alumno = alumnos.find(a => a.id === id)
     if (!alumno) {
         return res.status(404).json({
-            mensaje: "Debe elegir un id existente."
+            mensaje: "Alumno no encontrado"
         })
     }
     res.json(alumno)
 }
 
-function crearAlumno (req, res) {
+function crearAlumno(req, res) {
     const nuevoAlumno = req.body
     const { id, nombre, carrera } = req.body
-    if (!id || !nombre || !carrera ) {
+    if (!id || !nombre || !carrera){
         return res.status(400).json({
-            mensaje: "Todos los campos son obligatorios."
+            mensaje: "Todos los campos son obligatorios"
         })
     }
-    if (typeof nombre !== "string")
+    if (typeof nombre !== "string") {
         return res.status(400).json({
-            mensaje: "El nombre no debe ser numérico."
+            mensaje: "El nombre debe ser un texto"
         })
+    }
     alumnos.push(nuevoAlumno)
-    res.status(201).json({mensaje: "Alumno registrado correctamente."})
+    res.status(201).json({mensaje: "Alumno registrado correctamente"})
 }
 
-function actualizarAlumno (req, res) {
+function actualizarAlumno(req, res) {
     const id = Number(req.params.id)
     const alumno = alumnos.find(alumno => alumno.id === id)
-    if (!alumno) {
-        return res.status(404).json({
-            mensaje: "Debe elegir un id existente."
+    if (!alumno){
+      return  res.status(404).json({
+            mensaje: "Alumno no econtrado"
         })
     }
     alumno.id = req.body.id
     alumno.nombre = req.body.nombre
     alumno.carrera = req.body.carrera
-    res.json({mensaje: "Alumno actualizado correctamente."})
+
+    res.json({mensaje: "Alumno actualizado correctamente"})
 }
 
-function eliminarAlumno (req, res) {
+function eliminarAlumno(req, res) {
     const id = Number(req.params.id)
-    const alumnosActualizados = alumnos.filter(alumno => alumno.id !== id)
     const alumno = alumnos.find(a => a.id === id)
-    if (!alumno) {
-        return res.status(404).json({
-            mensaje: "Debe elegir un id existente."
+    if (!alumno){
+        return  res.status(404).json({
+            mensaje: "Alumno no econtrado"
         })
     }
+    const alumnosActualizados = alumnos.filter(alumno => alumno.id !== id)
+
     alumnos.length = 0
     alumnos.push(...alumnosActualizados)
+
     res.json({mensaje: "Alumno eliminado correctamente"})
 }
 
-module.exports = { obtenerAlumnos, obtenerAlumno, crearAlumno, actualizarAlumno, eliminarAlumno }
+module.exports = { obtenerAlumnos, 
+    obtenerAlumno, 
+    crearAlumno, 
+    actualizarAlumno,
+    eliminarAlumno }
