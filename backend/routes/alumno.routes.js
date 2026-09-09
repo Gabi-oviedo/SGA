@@ -1,7 +1,7 @@
 const express = require("express");
 //const alumnosController = require("../controllers/alumnos.controller");
 const {
-  obteneralumnos,
+  obtenerAlumnos,
   obtenerAlumno,
   crearAlumno,
   actualizarAlumno,
@@ -9,7 +9,7 @@ const {
 } = require("../controllers/alumnos.controller");
 const router = express.Router();
 
-router.get("/", obteneralumnos);
+router.get("/", obtenerAlumnos);
 
 router.get("/:id", obtenerAlumno);
 
