@@ -7,7 +7,12 @@ const alumnoSchema = new mongoose.Schema({
     carrera : String,
     correo : String,
        
+},
+{
+versionKey: false
 })
+
+
 
 const Alumno = mongoose.model('Alumno', alumnoSchema);
 

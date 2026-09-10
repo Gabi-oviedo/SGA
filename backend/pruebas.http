@@ -1,16 +1,17 @@
 GET http://localhost:3000/alumnos
 
 ###
-GET http://localhost:3000/alumnos/2
+GET http://localhost:3000/alumnos/1002
 
 ###
 POST http://localhost:3000/alumnos
 Content-Type: application/json
 
 {
-    "id": 3,
+    "legajo": 1020,
     "nombre": "Lucía",
-    "carrera": "Programación"
+    "carrera": "Programación",
+    "correo": "lucia@example.com"
 }
 ###
 PUT http://localhost:3000/alumnos/22
