@@ -1,7 +1,7 @@
 # Visual Studio Code
 .vscode/
 
-# Variables del entorno
+# Variables de entorno
 .env
 
 # Node.js
