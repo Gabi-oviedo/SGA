@@ -59,12 +59,12 @@ const btnCancelar = document.querySelector("#btnCancelar")
 btnCancelar.style.display = "none"
 const btnGuardar = document.querySelector("#btnGuardar")
 
-//async function cargarAlumnos(){
-   // const respuesta = await fetch("http://localhost:3000/alumnos")
-   // const alumnos = await respuesta.json()
-   // return alumnos
-//}
-// cargarAlumnos()
+/* async function cargarAlumnos() {
+    const respuesta = await fetch("http://localhost:3000/alumnos")
+    const alumnos = await respuesta.json()
+    console.table(alumnos)
+} */
+
 formulario.addEventListener("submit", function (event) {
     event.preventDefault();
 
@@ -134,11 +134,13 @@ formulario.addEventListener("submit", function (event) {
 });
 
 
-function obtenerAlumnos() {
+async function obtenerAlumnos() {
     const respuesta = await fetch("http://localhost:3000/alumnos")
     const alumnos = await respuesta.json()
     return alumnos
 }
+
+
 
 function mostrarAlumnos(alumnos) {
     listaAlumnos.innerHTML = ""
@@ -167,7 +169,6 @@ function mostrarAlumnos(alumnos) {
         `;
     }
 }
-
 function eliminarAlumno(id) {
     const alumnos = obtenerAlumnos()
     const alumnosActualizados = alumnos.filter(
@@ -230,8 +231,9 @@ function cancelarEdicion(){
 
 btnCancelar.addEventListener("click", cancelarEdicion)
 
-async function iniciar(){
+async function iniciar() {
     const alumnos = await obtenerAlumnos()
-    mostrarAlumnos(alumnos)
+    mostrarAlumnos(alumnos)  
 }
+
 iniciar()
