@@ -83,6 +83,6 @@ backend
 
 ## Autor
 
-Bruno Virili
+Gabriel Oviedo
 
 Programación IV
