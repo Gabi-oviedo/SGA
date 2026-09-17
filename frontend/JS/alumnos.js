@@ -1,4 +1,7 @@
+<<<<<<< HEAD:frontend/JS/alumnos.js
 
+=======
+>>>>>>> 570b1969483923242d64028434b901fcacd4be52:JS/alumnos.js
 const formulario = document.querySelector("#formulario")
 const mensaje = document.querySelector("#mensaje")
 const listaAlumnos = document.querySelector("#listaAlumnos")
@@ -7,16 +10,27 @@ let alumnoEditar = null
 const btnCancelar = document.querySelector("#btnCancelar")
 btnCancelar.style.display = "none"
 const btnGuardar = document.querySelector("#btnGuardar")
+<<<<<<< HEAD:frontend/JS/alumnos.js
 const API_ALUMNOS = "http://localhost:3000/alumnos";
 
 formulario.addEventListener("submit",  async function (event) {
+=======
+const API_ALUMNOS = "http://localhost:3000/alumnos"
+
+formulario.addEventListener("submit", async function (event) {
+>>>>>>> 570b1969483923242d64028434b901fcacd4be52:JS/alumnos.js
     event.preventDefault();
     const legajo = document.querySelector("#legajo").value.trim()
 
+<<<<<<< HEAD:frontend/JS/alumnos.js
     if (legajo === "") {
         mostrarMensaje("El legajo es obligatorio", "mje-error")
         return
     }
+=======
+
+    const legajo = document.querySelector("#legajo").value.trim()
+>>>>>>> 570b1969483923242d64028434b901fcacd4be52:JS/alumnos.js
     const nombre = document.querySelector("#nombre").value.trim()
     const carrera = document.querySelector("#carrera").value.trim()
     const correo = document.querySelector("#correo").value.trim()
@@ -36,6 +50,11 @@ formulario.addEventListener("submit",  async function (event) {
         return
     }
 
+<<<<<<< HEAD:frontend/JS/alumnos.js
+=======
+
+    // POST
+>>>>>>> 570b1969483923242d64028434b901fcacd4be52:JS/alumnos.js
     if (alumnoEditandoLegajo === null) {
         const alumno = {
             legajo: Number(legajo),
@@ -43,7 +62,10 @@ formulario.addEventListener("submit",  async function (event) {
             carrera: carrera,
             correo: correo
         }
+<<<<<<< HEAD:frontend/JS/alumnos.js
         
+=======
+>>>>>>> 570b1969483923242d64028434b901fcacd4be52:JS/alumnos.js
         const respuesta = await fetch(API_ALUMNOS, {
             method: "POST",
             headers: {
@@ -51,6 +73,7 @@ formulario.addEventListener("submit",  async function (event) {
             },
             body: JSON.stringify(alumno)
         })
+<<<<<<< HEAD:frontend/JS/alumnos.js
         
         if (!respuesta.ok) {
             mostrarMensaje("Error al guardar el alumno", "mje-error")
@@ -65,6 +88,14 @@ formulario.addEventListener("submit",  async function (event) {
         alumno.carrera = carrera
         alumno.correo = correo
 
+=======
+        if (!respuesta.ok) {
+            mostrarMensaje("No se pudo guardar el alumno", "mje-error")
+        return
+        }
+        mostrarMensaje("Alumno guardado correctamente", "mje-exito")
+    } else {
+>>>>>>> 570b1969483923242d64028434b901fcacd4be52:JS/alumnos.js
         const datosActuales = {
             nombre: nombre,
             carrera: carrera,
@@ -87,11 +118,29 @@ formulario.addEventListener("submit",  async function (event) {
             })
         })
 
+<<<<<<< HEAD:frontend/JS/alumnos.js
         if (!respuesta.ok) {
             mostrarMensaje("Error al actualizar el alumno", "mje-error")
             return
         }
 
+=======
+        const respuesta = await fetch(`${API_ALUMNOS}/${alumnoEditandoLegajo}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                nombre: nombre,
+                carrera: carrera,
+                correo: correo
+            })
+        })
+        if (!respuesta.ok) {
+            mostrarMensaje("No se pudo actualizar el alumno", "mje-error")
+            return
+        }
+>>>>>>> 570b1969483923242d64028434b901fcacd4be52:JS/alumnos.js
         alumnoEditandoLegajo = null
         alumnoEditar = null
         btnGuardar.textContent = "Guardar Alumno"
@@ -127,13 +176,13 @@ function mostrarAlumnos(alumnos) {
             <td>
                 <button 
                 class="btn-editar" 
-                data-id="${alumno.legajo}"
+                data-legajo="${alumno.legajo}"
                 title="Editar alumno">
                 <i class="fa-solid fa-pen"></i>
                 </button>
                 <button 
                 class="btn-eliminar" 
-                data-id="${alumno.legajo}"
+                data-legajo="${alumno.legajo}"
                 title="Eliminar alumno">
                 <i class="fa-solid fa-trash"></i>
                 </button>
@@ -146,6 +195,7 @@ async function eliminarAlumno(legajo) {
     const respuesta = await fetch(`${API_ALUMNOS}/${legajo}`, {
         method: "DELETE"
     })
+<<<<<<< HEAD:frontend/JS/alumnos.js
     const alumnos = await obtenerAlumnos()
     if (!respuesta.ok) {
         mostrarMensaje("Error al eliminar el alumno", "mje-error")
@@ -155,32 +205,55 @@ async function eliminarAlumno(legajo) {
     localStorage.setItem("alumnos", JSON.stringify(alumnosActualizados))
     mostrarAlumnos(alumnosActualizados)
     if (alumnoEditandoId === id){
+=======
+    if (!respuesta.ok) {
+        mostrarMensaje("No se pudo eliminar al alumno.", "mje-error")
+        return
+    }
+    if (alumnoEditandoLegajo === legajo){
+>>>>>>> 570b1969483923242d64028434b901fcacd4be52:JS/alumnos.js
         formulario.reset()
-        alumnoEditandoId = null
+        alumnoEditar = null
+        alumnoEditandoLegajo = null
         btnGuardar.textContent = "Guardar alumno"
+        document.querySelector("#legajo").disabled = false
+        btnCancelar.style.display = "none"
     }
     mostrarMensaje("Alumno eliminado correctamente", "mje-exito")
+    await actualizarListaAlumnos()
+}
+
+async function actualizarListaAlumnos() {
+    const alumnos = await obtenerAlumnos()
+    mostrarAlumnos(alumnos)
 }
 
 listaAlumnos.addEventListener("click", (e) => {
     const boton_el = e.target.closest(".btn-eliminar")
     if (boton_el) {
-        const id = Number(boton_el.dataset.id)
+        const legajo = Number(boton_el.dataset.legajo)
         const confirmar = confirm("¿Está seguro de eliminar este alumno?")
         if (confirmar) {
-        eliminarAlumno(id)
+        eliminarAlumno(legajo)
         }
     }
     const boton_ed = e.target.closest(".btn-editar")
     if (boton_ed) {
-        const id = Number(boton_ed.dataset.id)
-        editarAlumno(id)
+        const legajo = Number(boton_ed.dataset.legajo)
+        editarAlumno(legajo)
     }
 })
 
-function editarAlumno(id) {
-    const alumnos = obtenerAlumnos()
-    const alumno = alumnos.find(alumno => alumno.id === id)
+async function editarAlumno(legajo) {
+    const alumnos = await obtenerAlumnos()
+    const alumno = alumnos.find(alumno => alumno.legajo === legajo)
+
+    if (!alumno) {
+        mostrarMensaje("Alumno no encontrado", "mje-error")
+        return
+    }
+    document.querySelector("#legajo").value = alumno.legajo
+    document.querySelector("#legajo").disabled = false
     document.querySelector("#nombre").value = alumno.nombre;
     document.querySelector("#carrera").value = alumno.carrera;
     document.querySelector("#correo").value = alumno.correo;
@@ -191,7 +264,7 @@ function editarAlumno(id) {
         correo: alumno.correo
     }
 
-    alumnoEditandoId = id;
+    alumnoEditandoLegajo = alumno.legajo;
     btnCancelar.style.display ="inline-block"
 
     btnGuardar.textContent = "Actualizar Alumno"
@@ -200,18 +273,18 @@ function editarAlumno(id) {
 
 function cancelarEdicion(){
     formulario.reset()
-    alumnoEditandoId = null
+    alumnoEditandoLegajo = null
     alumnoEditar = null
     btnGuardar.textContent = "Guardar Alumno"
+    document.querySelector("#legajo").disabled = false
     btnCancelar.style.display = "none"
-    document.querySelector("#nombre").focus()
+    document.querySelector("#legajo").focus()
 }
 
 btnCancelar.addEventListener("click", cancelarEdicion)
 
 async function iniciar() {
-    const alumnos = await obtenerAlumnos()
-    mostrarAlumnos(alumnos)  
+    actualizarListaAlumnos()
 }
 
 iniciar()

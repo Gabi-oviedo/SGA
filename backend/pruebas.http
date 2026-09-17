@@ -9,9 +9,10 @@ POST http://localhost:3000/alumnos
 Content-Type: application/json
 
 {
-    "id": "4",
+    "legajo": 1002,
     "nombre": "Valentin",
-    "carrera": "BDD"
+    "carrera": "BDD",
+    "correo": "valentin@mail.com"
 }
 
 ###
