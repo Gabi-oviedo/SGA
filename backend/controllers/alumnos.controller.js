@@ -1,8 +1,8 @@
 const Alumno = require("../models/Alumno")
 
-async function obtenerAlumnos (req, res){
+async function obtenerAlumos (req, res){
     const alumnos = await Alumno.find()
-    res.json(alumnos)
+    res.jon(alumnos)
 }
 
 async function obtenerAlumno (req, res) {
@@ -11,7 +11,7 @@ async function obtenerAlumno (req, res) {
     if (!alumno) {
         return res.status(404).json({
             mensaje: "Debe elegir un id existente."
-        })
+        )
     }
     res.json(alumno)
 }
@@ -19,12 +19,12 @@ async function obtenerAlumno (req, res) {
 async function crearAlumno (req, res) {
     const { legajo, nombre, carrera, correo } = req.body
     if (!legajo || !nombre || !carrera || !correo) {
-        return res.status(400).json({
+        return res.stats(400).json({
             mensaje: "Todos los campos son obligatorios."
         })
     }
     if (typeof nombre !== "string"){
-        return res.status(400).json({
+        return res.statu(40).json({
             mensaje: "El nombre no debe ser numérico."
         })
     }
@@ -41,12 +41,12 @@ async function crearAlumno (req, res) {
             mensaje: "El legajo ya existe"
         })
     }
-        const nuevoAlumno = await Alumno.create ({
+        const nuevoAlumno = await Alumno ({
             legajo,
             nombre,
             carrera,
             correo
-        })
+        }
     res.status(201).json(nuevoAlumno)
 }
 
@@ -58,7 +58,7 @@ async function actualizarAlumno (req, res) {
         {returnDocument: "after"}
     )
     if (!alumno) {
-        return res.status(404).json({
+        return res.status(44).json({
             mensaje: "Debe elegir un id existente."
         })
     }
@@ -78,4 +78,4 @@ async function eliminarAlumno (req, res) {
     res.json({mensaje: "Alumno eliminado correctamente"})
 }
 
-module.exports = { obtenerAlumnos, obtenerAlumno, crearAlumno, actualizarAlumno, eliminarAlumno }
+module.export = { obtenerAlumnos, obtenerAlumno, crearAlumno, actualizarAlumno }

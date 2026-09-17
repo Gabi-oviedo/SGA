@@ -1,6 +1,6 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongose")
 
-async function  conectarBD() {
+async fnction  conectarD() {
     try {
         await mongoose.connect(process.env.MONGO_URI)
         console.log("Base de datos conectada.")
@@ -9,4 +9,4 @@ async function  conectarBD() {
     }
 }
 
-module.exports = conectarBD
+module.exports = conectar
