@@ -1,73 +1,22 @@
-// const alumnos = [
-//     {
-//         id: 1,
-//         nombre: "Ana"
-//     },
-//     {
-//         id: 2,
-//         nombre: "José"
-//     }
-// ];
-// function obtenerAlumnos(){
-//     return new Promise((resolve) => {
-//         setTimeout(() => {
-//             resolve(alumnos)
-//         }, 2000);
-//     })
-// }
-
-// crear obtenerMaterias()
-// crear obtenerDocentes()
-// mostrar los datos a través de async/await
-
-// async function obtenerAlumnos() {
-//     const respuesta = await fetch("https://jsonplaceholder.typicode.com/users")
-//     const alumnos = await respuesta.json()
-//     return alumnos
-// }
-
-// function mostrarAlumnos(alumnos){
-// //    console.table(alumnos)
-// console.log(typeof alumnos)
-// localStorage.setItem("alumnos", JSON.stringify(alumnos))
-// const datos = localStorage.getItem("alumnos")
-// console.log(typeof datos)
-// console.log(datos)
-// const alumnosRecuperados = JSON.parse(datos)
-// console.log(typeof alumnosRecuperados)
-// console.table(alumnosRecuperados)
-
-// //    console.log(alumnos[5])
-// // for (const alumno of alumnos){
-// //     console.log(alumno.id, alumno.name, alumno.email)
-// // }
-// }
-
-// async function inciar(){
-//     const alumnos = await obtenerAlumnos()  
-//     mostrarAlumnos(alumnos)
-// }
-
-// inciar()
 
 const formulario = document.querySelector("#formulario")
 const mensaje = document.querySelector("#mensaje")
 const listaAlumnos = document.querySelector("#listaAlumnos")
-let alumnoEditandoId = null
+let alumnoEditandoLegajo = null
 let alumnoEditar = null
 const btnCancelar = document.querySelector("#btnCancelar")
 btnCancelar.style.display = "none"
 const btnGuardar = document.querySelector("#btnGuardar")
+const API_ALUMNOS = "http://localhost:3000/alumnos";
 
-/* async function cargarAlumnos() {
-    const respuesta = await fetch("http://localhost:3000/alumnos")
-    const alumnos = await respuesta.json()
-    console.table(alumnos)
-} */
-
-formulario.addEventListener("submit", function (event) {
+formulario.addEventListener("submit",  async function (event) {
     event.preventDefault();
+    const legajo = document.querySelector("#legajo").value.trim()
 
+    if (legajo === "") {
+        mostrarMensaje("El legajo es obligatorio", "mje-error")
+        return
+    }
     const nombre = document.querySelector("#nombre").value.trim()
     const carrera = document.querySelector("#carrera").value.trim()
     const correo = document.querySelector("#correo").value.trim()
@@ -87,19 +36,31 @@ formulario.addEventListener("submit", function (event) {
         return
     }
 
-    const alumnos = obtenerAlumnos()
-
-    if (alumnoEditandoId === null) {
+    if (alumnoEditandoLegajo === null) {
         const alumno = {
-            id: Date.now(),
+            legajo: Number(legajo),
             nombre: nombre,
             carrera: carrera,
             correo: correo
         }
-        alumnos.push(alumno)
+        
+        const respuesta = await fetch(API_ALUMNOS, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(alumno)
+        })
+        
+        if (!respuesta.ok) {
+            mostrarMensaje("Error al guardar el alumno", "mje-error")
+            return
+        }
+        
+
         mostrarMensaje("Alumno guardado correctamente", "mje-exito")
     } else {
-        const alumno = alumnos.find(alumno => alumno.id === alumnoEditandoId)
+        const alumno = alumnos.find(alumno => alumno.legajo === alumnoEditandoLegajo)
         alumno.nombre = nombre
         alumno.carrera = carrera
         alumno.correo = correo
@@ -109,33 +70,45 @@ formulario.addEventListener("submit", function (event) {
             carrera: carrera,
             correo: correo
         }
-        // if (datosActuales.nombre === alumnoEditar.nombre &&
-        //     datosActuales.carrera === alumnoEditar.carrera &&
-        //     datosActuales.correo === alumnoEditar.correo) {
-        //         mostrarMensaje("No se realizaron cambios", "mje-error")
-        //         return
-        //     }
+        
         if (JSON.stringify(datosActuales) === JSON.stringify(alumnoEditar)){
             mostrarMensaje("No se realizaron cambios", "mje-adv")
             return
         }
+        const respuesta = await fetch(`${API_ALUMNOS}/${alumnoEditandoLegajo}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                nombe: nombre,
+                carrera: carrera,
+                correo: correo
+            })
+        })
 
-        alumnoEditandoId = null
+        if (!respuesta.ok) {
+            mostrarMensaje("Error al actualizar el alumno", "mje-error")
+            return
+        }
+
+        alumnoEditandoLegajo = null
         alumnoEditar = null
         btnGuardar.textContent = "Guardar Alumno"
-
+        document.querySelector("#legajo").disabled = false
+        btnCancelar.style.display = "none"
         mostrarMensaje("Alumno actualizado correctamente", "mje-exito")
     }
     // localStorage.setItem("alumnos", JSON.stringify(alumnos))
     guardarDatos("alumnos", alumnos)
-
+    const alumnosActualizados = await obtenerAlumnos()
     mostrarAlumnos(alumnos)
     formulario.reset()
 });
 
 
 async function obtenerAlumnos() {
-    const respuesta = await fetch("http://localhost:3000/alumnos")
+    const respuesta = await fetch(API_ALUMNOS)
     const alumnos = await respuesta.json()
     return alumnos
 }
@@ -169,11 +142,16 @@ function mostrarAlumnos(alumnos) {
         `;
     }
 }
-function eliminarAlumno(id) {
-    const alumnos = obtenerAlumnos()
-    const alumnosActualizados = alumnos.filter(
-        alumno => alumno.id !== id
-    );
+async function eliminarAlumno(legajo) {
+    const respuesta = await fetch(`${API_ALUMNOS}/${legajo}`, {
+        method: "DELETE"
+    })
+    const alumnos = await obtenerAlumnos()
+    if (!respuesta.ok) {
+        mostrarMensaje("Error al eliminar el alumno", "mje-error")
+        return
+    }
+   
     localStorage.setItem("alumnos", JSON.stringify(alumnosActualizados))
     mostrarAlumnos(alumnosActualizados)
     if (alumnoEditandoId === id){
