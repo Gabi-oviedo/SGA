@@ -212,7 +212,7 @@ function cancelarEdicion(){
 btnCancelar.addEventListener("click", cancelarEdicion)
 
 async function iniciar() {
-    actualizarListaAlumnos
+    actualizarListaAlumnos()
 }
 
 iniciar()
