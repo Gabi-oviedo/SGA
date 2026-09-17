@@ -7,12 +7,12 @@ const alumnosRoutes = require("./routes/alumnos.routes")
 app.use("/alumnos", alumnosRoutes)
 const conectarBD = require("./config/database")
 require("dotenv").config()
-const PORT = process.env.PORT
+const PORT = process.env.PORT || 3000;
 
 
 conectarBD()
 console.log("Ejecutado con nodemon")
 
 app.listen(PORT, () => {
-    console.log(`Servidor funcionando en http://localhost:3000:${PORT}`)
+    console.log(`Servidor funcionando en http://localhost:${PORT}`)
 })
