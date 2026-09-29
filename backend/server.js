@@ -4,6 +4,7 @@ const conectarBD = require("./config/database");
 require("dotenv").config();
 
 const alumnosRoutes = require("./routes/alumnos.routes");
+const docentesRoutes = require("./routes/docentes.routes");
 
 const app = express();
 
@@ -16,6 +17,7 @@ conectarBD();
 
 // Rutas
 app.use("/alumnos", alumnosRoutes);
+app.use("/docentes", docentesRoutes);
 
 // Ruta de prueba
 app.get("/", (req, res) => {

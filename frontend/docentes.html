@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>SGA - Alumnos</title>
+        <title>SGA - Docentes</title>
         <link rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-        <script src="./JS/storage.js" defer></script>
+
          <script src="./JS/docentes.js" defer></script>
         <script src="./JS/ui.js" defer></script>
-        <link rel="stylesheet" href="frontend/CSS/estilos.css">
+        <link rel="stylesheet" href="CSS/estilos.css">
     </head>
     <body>
         <header>
@@ -29,12 +29,12 @@
                         <input type="text" id="nombre">
                     </div>
                     <div class="campo">
-                        <label for="especialidad">especialidad</label>
+                        <label for="especialidad">Especialidad</label>
                         <input type="text" id="especialidad">
                     </div>
                     <div class="campo">
                         <label for="correo">Correo electrónico</label>
-                        <input type="texto" id="correo">
+                        <input type="email" id="correo">
                     </div>
                     <div class="acciones-form">
                         <button type="submit" id="btnGuardar">Guardar Docente</button>
@@ -43,7 +43,7 @@
                 </form>
             </section>
             <section class="lista-container">
-                <h2>docente registrados</h2>
+                <h2>Docentes registrados</h2>
                 <!-- <p id="cantidadDocentes"></p> -->
                 <table>
                     <thead>
