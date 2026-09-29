@@ -1,81 +1,108 @@
-const Alumno = require("../models/Alumno")
+const Alumno = require("../models/Alumno");
 
-async function obtenerAlumos (req, res){
-    const alumnos = await Alumno.find()
-    res.jon(alumnos)
+async function obtenerAlumnos(req, res) {
+    const alumnos = await Alumno.find();
+    res.json(alumnos);
 }
 
-async function obtenerAlumno (req, res) {
+async function obtenerAlumno(req, res) {
     const alumno = await Alumno.findOne({
-        legajo: Number(req.params.id)})
+        legajo: Number(req.params.id)
+    });
+
     if (!alumno) {
         return res.status(404).json({
             mensaje: "Debe elegir un id existente."
-        )
+        });
     }
-    res.json(alumno)
+
+    res.json(alumno);
 }
 
-async function crearAlumno (req, res) {
-    const { legajo, nombre, carrera, correo } = req.body
+async function crearAlumno(req, res) {
+    const { legajo, nombre, carrera, correo } = req.body;
+
     if (!legajo || !nombre || !carrera || !correo) {
-        return res.stats(400).json({
-            mensaje: "Todos los campos son obligatorios."
-        })
-    }
-    if (typeof nombre !== "string"){
-        return res.statu(40).json({
-            mensaje: "El nombre no debe ser numérico."
-        })
-    }
-    if (typeof legajo !== "number"){
         return res.status(400).json({
-            mensaje: "El legajo debe ser un número"
-        })
+            mensaje: "Todos los campos son obligatorios."
+        });
     }
+
+    if (typeof nombre !== "string") {
+        return res.status(400).json({
+            mensaje: "El nombre debe ser un texto."
+        });
+    }
+
+    if (typeof legajo !== "number") {
+        return res.status(400).json({
+            mensaje: "El legajo debe ser un número."
+        });
+    }
+
     const existe = await Alumno.findOne({
         legajo
-    })
+    });
+
     if (existe) {
         return res.status(400).json({
-            mensaje: "El legajo ya existe"
-        })
+            mensaje: "El legajo ya existe."
+        });
     }
-        const nuevoAlumno = await Alumno ({
-            legajo,
-            nombre,
-            carrera,
-            correo
-        }
-    res.status(201).json(nuevoAlumno)
+
+    const nuevoAlumno = new Alumno({
+        legajo,
+        nombre,
+        carrera,
+        correo
+    });
+
+    await nuevoAlumno.save();
+
+    res.status(201).json(nuevoAlumno);
 }
 
-async function actualizarAlumno (req, res) {
-    const {nombre, carrera, correo} = req.body
+async function actualizarAlumno(req, res) {
+    const { nombre, carrera, correo } = req.body;
+
     const alumno = await Alumno.findOneAndUpdate(
-        {legajo: Number(req.params.id)},
-        {nombre, carrera, correo},
-        {returnDocument: "after"}
-    )
-    if (!alumno) {
-        return res.status(44).json({
-            mensaje: "Debe elegir un id existente."
-        })
-    }
+        { legajo: Number(req.params.id) },
+        { nombre, carrera, correo },
+        { returnDocument: "after" }
+    );
 
-    res.json({mensaje: "Alumno actualizado correctamente."})
-}
-
-async function eliminarAlumno (req, res) {
-    const alumno = await Alumno.findOneAndDelete(
-        {legajo: Number(req.params.id)}
-    )
     if (!alumno) {
         return res.status(404).json({
             mensaje: "Debe elegir un id existente."
-        })
+        });
     }
-    res.json({mensaje: "Alumno eliminado correctamente"})
+
+    res.json({
+        mensaje: "Alumno actualizado correctamente.",
+        alumno
+    });
 }
 
-module.export = { obtenerAlumnos, obtenerAlumno, crearAlumno, actualizarAlumno }
+async function eliminarAlumno(req, res) {
+    const alumno = await Alumno.findOneAndDelete({
+        legajo: Number(req.params.id)
+    });
+
+    if (!alumno) {
+        return res.status(404).json({
+            mensaje: "Debe elegir un id existente."
+        });
+    }
+
+    res.json({
+        mensaje: "Alumno eliminado correctamente."
+    });
+}
+
+module.exports = {
+    obtenerAlumnos,
+    obtenerAlumno,
+    crearAlumno,
+    actualizarAlumno,
+    eliminarAlumno
+};

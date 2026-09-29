@@ -1,12 +1,12 @@
-const mongoose = require("mongose")
+const mongoose = require("mongoose");
 
-async fnction  conectarD() {
+async function conectarBD() {
     try {
-        await mongoose.connect(process.env.MONGO_URI)
-        console.log("Base de datos conectada.")
+        await mongoose.connect(process.env.MONGO_URI);
+        console.log("Base de datos conectada.");
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
 }
 
-module.exports = conectar
+module.exports = conectarBD;
