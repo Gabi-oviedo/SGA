@@ -1,6 +1,6 @@
-function Titulo(){
+function Titulo({texto,color}){
     return(
-        <h1>Bienvenido al Sistema de Gestión Académica</h1>
+        <h1 style={{ color:color }}>{texto}</h1>    
     )
 }
 
