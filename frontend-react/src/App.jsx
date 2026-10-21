@@ -1,6 +1,7 @@
 import { ListaAlumnos } from "./components/ListaAlumnos"
 import { useState } from "react"
 import FormularioA from "./components/FormularioA"
+import {FAQ}from "./components/FAQ"
 
 function App()
 {
@@ -28,6 +29,7 @@ return (
    onAlumnoCreado={alumnoCreado}
    onEditarAlumno={seleccionarAlumno}
    />
+   <FAQ />
    </main>
   )
 }
