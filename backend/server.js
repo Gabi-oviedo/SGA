@@ -1,34 +1,23 @@
-const express = require("express");
-const cors = require("cors");
-const conectarBD = require("./config/database");
-require("dotenv").config();
+const express = require("express"); const cors = require("cors"); const conectarBD = require("./config/database"); require("dotenv").config();
 
-const alumnosRoutes = require("./routes/alumnos.routes");
-const docentesRoutes = require("./routes/docentes.routes");
+const alumnosRoutes = require("./routes/alumnos.routes"); const docentesRoutes = require("./routes/docentes.routes");
 
 const app = express();
 
-// Middlewares
-app.use(cors());
-app.use(express.json());
+// Middlewares 
+app.use(cors()); app.use(express.json());
 
-// Conexión a MongoDB
+// Conexión a MongoDB 
 conectarBD();
 
-// Rutas
-app.use("/alumnos", alumnosRoutes);
-app.use("/docentes", docentesRoutes);
+// Rutas 
+app.use("/alumnos", alumnosRoutes); app.use("/docentes", docentesRoutes);
 
-// Ruta de prueba
-app.get("/", (req, res) => {
-    res.json({
-        mensaje: "Servidor SGA funcionando correctamente"
-    });
-});
+// Ruta de prueba 
+app.get("/", (req, res) => { res.json({ mensaje: "Servidor SGA funcionando correctamente" }); });
 
-// Puerto
+// Puerto del servidor 
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => {
-    console.log(`Servidor ejecutándose en http://localhost:${PORT}`);
-});
+// Iniciar servidor 
+app.listen(PORT, () => { console.log(`Servidor ejecutándose en http://localhost:${PORT}`); });

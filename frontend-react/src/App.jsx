@@ -1,22 +1,34 @@
-//import Pantalla from "./components/ejemplos/Pantalla";
-import { useEffect, useState } from "react";
+import { ListaAlumnos } from "./components/ListaAlumnos"
+import { useState } from "react"
+import FormularioA from "./components/FormularioA"
+
 function App()
 {
+const [actualizar, setActualizar] = useState(0)
+const [alumnoEditar, setAlumnoEditar] = useState(null)
 
-  const [nombre, setNombre] = useState("");
-  useEffect(() => {
-    if (nombre) {
-      document.title = document.title = `hola ${nombre}`;
-    }else{
-      document.title = "React App";
-    }
-  }, [nombre]);
+function alumnoCreado() {
+  setActualizar(valor => valor + 1)
+  setAlumnoEditar(null)
+}
 
-  return (
-    <>
-    <input value={nombre} onChange={(e) => setNombre(e.target.value)} placeholder="Ingrese su nombre"></input>
-    <h2>Hola, {nombre}!</h2>
-    </> 
+function seleccionarAlumno(alumno) {
+  setAlumnoEditar(alumno)
+}
+
+return (
+   <main>
+   <FormularioA key={alumnoEditar?.legajo ?? "nuevo"}
+   onAlumnoCreado={alumnoCreado}
+   alumnoEditar={alumnoEditar}
+   onCancelar={() => setAlumnoEditar(null)}
+   />
+   <ListaAlumnos 
+   actualizar={actualizar} 
+   onAlumnoCreado={alumnoCreado}
+   onEditarAlumno={seleccionarAlumno}
+   />
+   </main>
   )
 }
 export default App
