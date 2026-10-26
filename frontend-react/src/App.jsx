@@ -1,36 +1,23 @@
-import { ListaAlumnos } from "./components/ListaAlumnos"
-import { useState } from "react"
-import FormularioA from "./components/FormularioA"
-import {FAQ}from "./components/FAQ"
-
+import Alumnos from './pages/Alumnos';
+import FAQ from './pages/FAQ';
+import SelectorTema from './components/SelectorTema';
+import {Routes, Route} from "react-router-dom";
+import LayoutPpal from './components/LayoutPpal';
+import Inicio from './pages/Inicio';
 function App()
 {
-const [actualizar, setActualizar] = useState(0)
-const [alumnoEditar, setAlumnoEditar] = useState(null)
 
-function alumnoCreado() {
-  setActualizar(valor => valor + 1)
-  setAlumnoEditar(null)
-}
-
-function seleccionarAlumno(alumno) {
-  setAlumnoEditar(alumno)
-}
-
-return (
-   <main>
-   <FormularioA key={alumnoEditar?.legajo ?? "nuevo"}
-   onAlumnoCreado={alumnoCreado}
-   alumnoEditar={alumnoEditar}
-   onCancelar={() => setAlumnoEditar(null)}
-   />
-   <ListaAlumnos 
-   actualizar={actualizar} 
-   onAlumnoCreado={alumnoCreado}
-   onEditarAlumno={seleccionarAlumno}
-   />
-   <FAQ />
-   </main>
+  return (
+    <>
+    <Routes>
+      <Route path="/" element={<LayoutPpal />}>
+      <Route index element={<Inicio />} />
+      <Route path="/alumnos" element={<Alumnos />} />
+      <Route path="/ayuda" element={<FAQ />} />
+      </Route>
+    </Routes>
+    <SelectorTema />
+    </>
   )
 }
 export default App
