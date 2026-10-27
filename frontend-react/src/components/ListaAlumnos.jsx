@@ -49,33 +49,43 @@ export function ListaAlumnos({ actualizar, onAlumnoCreado, onEditarAlumno }) {
     }, [actualizar])
 
     if (cargando) {
-        return <p>Cargando alumnos...</p>
+        return <p className="sga-list-state">Cargando alumnos...</p>
     }
     if (error) {
-        return <p role="alert">{error}</p>
+        return <p className="sga-list-state sga-list-error" role="alert">{error}</p>
     }
     return (
-    <section>
-    <h2>Alumnos</h2>
+    <section className="sga-lista">
+    <div className="sga-section-heading">
+        <span className="sga-eyebrow">Directorio</span>
+        <h2>Alumnos</h2>
+    </div>
     {alumnos.length === 0 
-    ? (<p>No hay alumnos registrados.</p>)
+    ? (<p className="sga-list-state">No hay alumnos registrados.</p>)
     : ( 
-        <ul style={{listStyle:"none"}}>
+        <ul className="sga-list-items">
         {alumnos.map(alumno => (
-            <li key={alumno.legajo}>
-            {alumno.legajo} - {alumno.nombre} - {alumno.carrera}
-            <br />
+            <li className="sga-list-item" key={alumno.legajo}>
+            <div className="sga-student-info">
+                <span className="sga-student-number">Legajo {alumno.legajo}</span>
+                <strong>{alumno.nombre}</strong>
+                <span>{alumno.carrera}</span>
+            </div>
+            <div className="sga-student-actions">
             <button
+            className="sga-button sga-button-secondary"
             type="button"
             onClick={() => onEditarAlumno(alumno)}>
                 Editar
             </button>
             <button 
+            className="sga-button sga-button-danger"
             type="button"
             onClick={()=> eliminarAlumno(alumno.legajo)}
             >
                 Eliminar
             </button>
+            </div>
         </li>)
     )}
     </ul>

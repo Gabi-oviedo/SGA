@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">SGA, Gestión Académica</title>
+  <rect x="2" y="2" width="60" height="60" rx="14" fill="#526d82"/>
+  <path d="M13 18.5c7.1-2.8 13.3-1.6 19 2.2 5.7-3.8 11.9-5 19-2.2v28c-7.1-2.8-13.3-1.6-19 2.2-5.7-3.8-11.9-5-19-2.2z" fill="#fffcf7"/>
+  <path d="M32 20.7v28M18 25.5c4.2-.9 7.6-.3 10.4 1.2m17.6-1.2c-4.2-.9-7.6-.3-10.4 1.2M18 33c4.2-.9 7.6-.3 10.4 1.2m17.6-1.2c-4.2-.9-7.6-.3-10.4 1.2" fill="none" stroke="#526d82" stroke-linecap="round" stroke-width="2"/>
+  <circle cx="50" cy="47" r="8" fill="#d18b65"/>
+  <path d="m46.8 47 2.1 2.1 4.3-4.5" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"/>
+</svg>

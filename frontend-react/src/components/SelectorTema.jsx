@@ -8,7 +8,7 @@ const modoOscuro = mode === "dark";
 
 function cambiarModo(event) { setMode(event.target.checked ? "dark" : "light"); }
 
-return ( <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 3, width: "100%", }}
+return ( <Box sx={{ position: "absolute", top: 14, right: 12, zIndex: 2, display: "flex", justifyContent: "flex-end", width: "auto" }}
 
 >
   <MaterialUISwitch

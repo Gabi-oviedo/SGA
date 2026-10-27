@@ -1,6 +1,7 @@
 import { createTheme } from "@mui/material/styles"
 
 const tema = createTheme({
+    cssVariables: true,
     colorSchemes: {
         light: {
             palette: {

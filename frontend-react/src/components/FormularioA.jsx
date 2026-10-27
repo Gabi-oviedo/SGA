@@ -62,9 +62,13 @@ function FormularioA({ onAlumnoCreado, alumnoEditar, onCancelar }){
         onCancelar()
     }
     return(
-        <>
-        <h2>{alumnoEditar ? "Editar alumno" : "Nuevo Alumno"}</h2>
-        <form onSubmit={guardar}>
+        <section className="sga-formulario">
+        <div className="sga-section-heading">
+            <span className="sga-eyebrow">Alumnos</span>
+            <h2>{alumnoEditar ? "Editar alumno" : "Nuevo Alumno"}</h2>
+        </div>
+        <form className="sga-form-grid" onSubmit={guardar}>
+            <div className="sga-form-field">
             <label htmlFor="legajo">Legajo</label>
             <input
             id="legajo"
@@ -73,6 +77,8 @@ function FormularioA({ onAlumnoCreado, alumnoEditar, onCancelar }){
             onChange={manejarCambio}
             required
             />
+            </div>
+            <div className="sga-form-field">
             <label htmlFor="nombre">Nombre</label>
             <input
             id="nombre"
@@ -81,6 +87,8 @@ function FormularioA({ onAlumnoCreado, alumnoEditar, onCancelar }){
             onChange={manejarCambio}
             required
             />
+            </div>
+            <div className="sga-form-field">
             <label htmlFor="carrera">Carrera</label>
             <input
             id="carrera"
@@ -89,6 +97,8 @@ function FormularioA({ onAlumnoCreado, alumnoEditar, onCancelar }){
             onChange={manejarCambio}
             required
             />
+            </div>
+            <div className="sga-form-field">
             <label htmlFor="correo">Correo</label>
             <input
             id="correo"
@@ -97,7 +107,9 @@ function FormularioA({ onAlumnoCreado, alumnoEditar, onCancelar }){
             onChange={manejarCambio}
             required
             />
-            <button type="submit" disabled={guardando}>
+            </div>
+            <div className="sga-form-actions">
+            <button className="sga-button sga-button-primary" type="submit" disabled={guardando}>
                 {guardando 
                 ? "Guardando..." 
                 : alumnoEditar 
@@ -106,6 +118,7 @@ function FormularioA({ onAlumnoCreado, alumnoEditar, onCancelar }){
             </button>
             {alumnoEditar && (
                 <button
+                className="sga-button sga-button-secondary"
                 type="button"
                 onClick={cancelar}
                 disabled={guardando}
@@ -113,10 +126,10 @@ function FormularioA({ onAlumnoCreado, alumnoEditar, onCancelar }){
                     Cancelar
                 </button>
             )}
-            <br />
-            {error && <p role="alert">{error}</p>}
+            </div>
+            {error && <p className="sga-form-error" role="alert">{error}</p>}
         </form>
-        </>
+        </section>
     )
 }
 export default FormularioA
