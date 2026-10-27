@@ -1,10 +1,10 @@
 import { useState } from "react";
-import {Alert, Button, Box, Paper, TextField, Typography} from "@mui/material"
+import { Alert, Box, Button, Paper, TextField, Typography } from "@mui/material"
 const API_DOCENTES = "http://localhost:3000/docentes"
 
 function FormularioD({ onDocenteCreado, docenteEditar, onCancelar }){
     const [formulario, setFormulario] = useState({
-        DNI: String(docenteEditar?.DNI ?? ""),
+        dni: String(docenteEditar?.dni ?? ""),
         nombre: docenteEditar?.nombre ?? "",
         especialidad: docenteEditar?.especialidad ?? "",
         correo: docenteEditar?.correo ?? ""
@@ -28,11 +28,11 @@ function FormularioD({ onDocenteCreado, docenteEditar, onCancelar }){
         
     const docente = {
         ...formulario,
-        DNI: String(formulario.DNI)
+        dni: Number(formulario.dni)
     }
     const editando = Boolean(docenteEditar)
     const url = editando 
-                ? `${API_DOCENTES}/${docenteEditar.DNI}`
+                ? `${API_DOCENTES}/${docenteEditar.dni}`
                 : API_DOCENTES
         try {
             const respuesta = await fetch(url, {
@@ -46,7 +46,7 @@ function FormularioD({ onDocenteCreado, docenteEditar, onCancelar }){
             }
 
             setFormulario({
-                DNI: "",
+                dni: "",
                 nombre: "",
                 especialidad: "",
                 correo: ""
@@ -63,74 +63,101 @@ function FormularioD({ onDocenteCreado, docenteEditar, onCancelar }){
         onCancelar()
     }
     return(
-        <section className="sga-formulario">
-        <div className="sga-section-heading">
-            <span className="sga-eyebrow">Docentes</span>
-            <h2>{docenteEditar ? "Editar docente" : "Nuevo Docente"}</h2>
-        </div>
-        <form className="sga-form-grid" onSubmit={guardar}>
-            <div className="sga-form-field">
-            <label htmlFor="DNI">DNI</label>
-            <input
-            id="DNI"
-            name="DNI"
-            value={formulario.DNI}
-            onChange={manejarCambio}
-            required
-            />
-            </div>
-            <div className="sga-form-field">
-            <label htmlFor="nombre">Nombre</label>
-            <input
-            id="nombre"
-            name="nombre"
-            value={formulario.nombre}
-            onChange={manejarCambio}
-            required
-            />
-            </div>
-            <div className="sga-form-field">
-            <label htmlFor="especialidad">Especialidad</label>
-            <input
-            id="especialidad"
-            name="especialidad"
-            value={formulario.especialidad}
-            onChange={manejarCambio}
-            required
-            />
-            </div>
-            <div className="sga-form-field">
-            <label htmlFor="correo">Correo</label>
-            <input
-            id="correo"
-            name="correo"
-            value={formulario.correo}
-            onChange={manejarCambio}
-            required
-            />
-            </div>
-            <div className="sga-form-actions">
-            <button className="sga-button sga-button-primary" type="submit" disabled={guardando}>
-                {guardando 
-                ? "Guardando..." 
-                : docenteEditar 
-                    ? "Guardar cambios"
-                    : "Guardar"}
-            </button>
-            {docenteEditar && (
-                <button
-                className="sga-button sga-button-secondary"
-                type="button"
-                onClick={cancelar}
-                disabled={guardando}
+        <Paper
+            component="section"
+            elevation={0}
+            sx={{
+                p: { xs: 2.5, sm: 3.5 },
+                mb: 3,
+                border: 1,
+                borderColor: "divider",
+                borderRadius: 4,
+                bgcolor: "background.paper"
+            }}
+        >
+            <Typography component="h2" variant="h5" sx={{ mb: 2.5, fontWeight: 700 }}>
+                {docenteEditar ? "Editar docente" : "Nuevo Docente"}
+            </Typography>
+            <Box
+                component="form"
+                onSubmit={guardar}
+                sx={{
+                    display: "grid",
+                    gridTemplateColumns: { xs: "1fr", sm: "repeat(2, minmax(0, 1fr))" },
+                    gap: 2
+                }}
+            >
+                <TextField
+                    id="dni"
+                    name="dni"
+                    label="DNI"
+                    value={formulario.dni}
+                    onChange={manejarCambio}
+                    required
+                    fullWidth
+                />
+                <TextField
+                    id="nombre"
+                    name="nombre"
+                    label="Nombre"
+                    value={formulario.nombre}
+                    onChange={manejarCambio}
+                    required
+                    fullWidth
+                />
+                <TextField
+                    id="especialidad"
+                    name="especialidad"
+                    label="Especialidad"
+                    value={formulario.especialidad}
+                    onChange={manejarCambio}
+                    required
+                    fullWidth
+                />
+                <TextField
+                    id="correo"
+                    name="correo"
+                    label="Correo"
+                    value={formulario.correo}
+                    onChange={manejarCambio}
+                    required
+                    fullWidth
+                />
+                <Box
+                    sx={{
+                        gridColumn: "1 / -1",
+                        display: "flex",
+                        justifyContent: "flex-end",
+                        flexWrap: "wrap",
+                        gap: 1.5,
+                        mt: 1
+                    }}
                 >
-                    Cancelar
-                </button>
-            )}
-            </div>
-            {error && <p className="sga-form-error" role="alert">{error}</p>}
-        </form>
-        </section>
+                    <Button type="submit" variant="contained" disabled={guardando}>
+                        {guardando
+                            ? "Guardando..."
+                            : docenteEditar
+                                ? "Guardar cambios"
+                                : "Guardar"}
+                    </Button>
+                    {docenteEditar && (
+                        <Button
+                            type="button"
+                            onClick={cancelar}
+                            disabled={guardando}
+                            variant="outlined"
+                        >
+                            Cancelar
+                        </Button>
+                    )}
+                </Box>
+                {error && (
+                    <Alert severity="error" role="alert" sx={{ gridColumn: "1 / -1" }}>
+                        {error}
+                    </Alert>
+                )}
+            </Box>
+        </Paper>
     )
 }
 export default FormularioD
