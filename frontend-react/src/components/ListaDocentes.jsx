@@ -6,31 +6,36 @@ import Chip from "@mui/material/Chip"
 import Paper from "@mui/material/Paper"
 import Stack from "@mui/material/Stack"
 import Typography from "@mui/material/Typography"
-const API_DOCENTES = "http://localhost:3000/docentes"
+const API_DOCENTES = "https://sinister-cadaver-9746xrrrvqg42pvrg-3000.app.github.dev/docentes";
 
 export function ListaDocentes({ actualizar, onDocenteCreado, onEditarDocente }) {
     const [docentes, setDocentes] = useState([])
     const [cargando, setCargando] = useState(true)
     const [error, setError] = useState("")
 
-    async function eliminarDocente(dni){
-        const confirmar = window.confirm("¿Seguro que querés eliminar este alumno?")
-        if (!confirmar) {
-            return
-        }
-        try {
-            const respuesta = await fetch(`${API_DOCENTES}/${dni}`, 
-                { method: "DELETE" }
-            )
-            if (!respuesta.ok) {
-                throw new Error(`No se pudo eliminar. Estado HTTP: ${respuesta.status}`)
-            }
-            onDocenteCreado()
-        } catch (error) {
-            console.error("Error al eliminar: ", error)
-            alert(error.message || "No se pudo eliminar docente")
-        }
+    
+async function eliminarDocente(id) {
+    const confirmar = window.confirm("¿Seguro que querés eliminar este docente?");
+    if (!confirmar) {
+        return;
     }
+
+    try {
+        const respuesta = await fetch(`${API_DOCENTES}/${id}`, {
+            method: "DELETE"
+        });
+
+        if (!respuesta.ok) {
+            throw new Error(`No se pudo eliminar. Estado HTTP: ${respuesta.status}`);
+        }
+
+        onDocenteCreado();
+    } catch (error) {
+        console.error("Error al eliminar:", error);
+        alert(error.message || "No se pudo eliminar docente");
+    }
+}
+
     useEffect(() => {
         async function cargarDocentes(){
             setCargando(true)
@@ -133,7 +138,7 @@ export function ListaDocentes({ actualizar, onDocenteCreado, onEditarDocente }) 
                                     </Button>
                                     <Button
                                         type="button"
-                                        onClick={() => eliminarDocente(docente.dni)}
+                                        onClick={() => eliminarDocente(docente._id)}
                                         variant="outlined"
                                         color="error"
                                         size="small"

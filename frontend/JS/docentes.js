@@ -1,4 +1,4 @@
-const API_DOCENTES = "http://localhost:3000/docentes";
+const API_DOCENTES = "https://sinister-cadaver-9746xrrrvqg42pvrg-3000.app.github.dev/docentes";
 
 const formulario = document.querySelector("#formulario");
 const listaDocentes = document.querySelector("#listaDocentes");

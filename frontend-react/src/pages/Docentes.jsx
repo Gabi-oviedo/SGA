@@ -1,4 +1,4 @@
-import {ListaDocente} from '../components/ListaDocente';
+import {ListaDocentes} from '../components/ListaDocentes';
 import { useState } from 'react';
 import  FormularioD  from '../components/FormularioD';
 export default function Docentes() {
@@ -26,7 +26,7 @@ return (
    <ListaDocentes 
    actualizar={actualizar} 
    onDocenteCreado={docenteCreado}
-   onEditarDocente={seleccionarDocentet} 
+   onEditarDocente={seleccionarDocente} 
    /> 
   </>
   )}

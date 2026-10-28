@@ -2,6 +2,7 @@ import { createTheme } from "@mui/material/styles"
 
 const tema = createTheme({
     cssVariables: true,
+    colorSchemeSelector: "class",
     colorSchemes: {
         light: {
             palette: {

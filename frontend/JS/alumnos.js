@@ -6,7 +6,7 @@ let alumnoEditar = null
 const btnCancelar = document.querySelector("#btnCancelar")
 btnCancelar.style.display = "none"
 const btnGuardar = document.querySelector("#btnGuardar")
-const API_ALUMNOS = "http://localhost:3000/alumnos"
+const API_ALUMNOS = "https://sinister-cadaver-9746xrrrvqg42pvrg-3000.app.github.dev/alumnos"
 
 formulario.addEventListener("submit", async function (event) {
     event.preventDefault();
