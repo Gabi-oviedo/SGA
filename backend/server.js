@@ -3,7 +3,7 @@ const cors = require("cors");
 const conectarBD = require("./config/database");
 require("dotenv").config();
 const mongoose = require("mongoose");
-
+const materiasRoutes = require("./routes/materiasroutes");
 const alumnosRoutes = require("./routes/alumnos.routes");
 const docentesRoutes = require("./routes/docentes.routes");
 
@@ -14,6 +14,7 @@ app.use(express.json());
 
 app.use("/alumnos", alumnosRoutes);
 app.use("/docentes", docentesRoutes);
+app.use("/materias", materiasRoutes);
 
 app.get("/", (req, res) => {
 res.json({
@@ -33,7 +34,7 @@ async function iniciarServidor() {
         const Alumno = require("./models/Alumno");
         const alumnos = await Alumno.find();
 
-        console.log("Consulta correcta. Cantidad de alumnos:", alumnos.length);
+       
 
         app.listen(PORT, () => {
             console.log(`Servidor ejecutándose en http://localhost:${PORT}`);
