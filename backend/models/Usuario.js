@@ -27,5 +27,5 @@ rol: {
     versionKey: false
 })
 
-const usuario = mongoose.model("Usuario", usuarioSchema)
-module.exports = usuario
+const Usuario = mongoose.model("Usuario", usuarioSchema)
+module.exports = Usuario

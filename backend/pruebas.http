@@ -1,43 +1,62 @@
-GET http://localhost:3000/alumnos
+
+GET http://localhost:3001/alumnos
 
 ###
-
-GET http://localhost:3000/alumnos/1005
+GET http://localhost:3001/alumnos/1002
 
 ###
-POST http://localhost:3000/alumnos
+POST http://localhost:3001/alumnos
 Content-Type: application/json
 
 {
-    "legajo": 1002,
-    "nombre": "Valentin",
-    "carrera": "BDD",
-    "correo": "valentin@mail.com"
-}
-
-###
-
-POST http://localhost:3000/alumnos
-Content-Type: application/json
-
-{
-    "legajo": 1006,
-    "nombre": "Adriel",
+    "legajo": 1023,
+    "nombre": "Ramón",
     "carrera": "Sistemas",
-    "correo": "adri@mail.com"
+    "correo": "ramon@mail.com"
 }
-
 ###
-
-PUT http://localhost:3000/alumnos/4
+PUT http://localhost:3001/alumnos/1002
 Content-Type: application/json
 
 {
-    "id": "5",
-    "nombre": "Lucas",
-    "carrera": "Sistemas"
+    "nombre": "Juan Carlos",
+    "carrera": "Programación",
+    "correo": "juan@mail.com"
+}
+
+###
+DELETE http://localhost:3001/alumnos/1021
+
+###
+POST http://localhost:3001/alumnos
+Content-Type: application/json
+
+{
+    "id": 5,
+    "nombre": "Rocío",
+    "carrera": "Programación"
+}
+
+###
+GET http://localhost:3001/docentes
+
+###
+POST http://localhost:3001/docentes
+Content-Type: application/json
+
+{
+    "dni": 5222311,
+    "nombre": "Rocío",
+    "especialidad": "Programación",
+    "correo": "rocio@mail.com"
 }
 
 ###
 
-DELETE http://localhost:3000/alumnos/1021
+POST http://localhost:3001/auth/login
+Content-Type: application/json
+
+{
+    "email": "admin@sga.com",
+    "password": "ClaveDePrueba123!"
+}

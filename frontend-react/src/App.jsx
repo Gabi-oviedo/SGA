@@ -5,6 +5,7 @@ import LayoutPpal from './components/LayoutPpal';
 import Inicio from './pages/Inicio';
 import Docentes from "./pages/Docentes";
 import Materias from './pages/Materias';
+import Login from './pages/Login';
 function App()
 {
 
@@ -17,6 +18,7 @@ function App()
       <Route path="/ayuda" element={<FAQ />} />
       <Route path="/docentes" element={<Docentes />} />
       <Route path="/materias" element={<Materias />} />
+      <Route path="/login" element={<Login />} /> 
       </Route>
     </Routes>
     </>

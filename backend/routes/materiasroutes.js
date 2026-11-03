@@ -14,11 +14,6 @@ router.get("/", obtenerMaterias);
 
 router.get("/:codigo", obtenerMateria);
 
-router.post("/", (req, res, next) => {
-    console.log("POST /materias recibido");
-    next();
-}, crearMateria);
-
 router.post("/", crearMateria);
 
 router.put("/:codigo", actualizarMateria);
