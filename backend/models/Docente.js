@@ -2,6 +2,11 @@ const mongoose = require("mongoose");
 
 const docenteSchema = new mongoose.Schema(
     {
+        dni: {
+            type: Number,
+            required: true,
+            unique: true
+        },
         nombre: {
             type: String,
             required: true

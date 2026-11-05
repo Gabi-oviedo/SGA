@@ -7,7 +7,7 @@ import Paper from "@mui/material/Paper"
 import Stack from "@mui/material/Stack"
 import Typography from "@mui/material/Typography"
 
-const API_MATERIAS = "https://sinister-cadaver-9746xrrrvqg42pvrg-3000.app.github.dev/materias"
+const API_MATERIAS = "https://sinister-cadaver-9746xrrrvqg42pvrg-3001.app.github.dev/materias"
 
 export function ListaMaterias({ actualizar, onMateriaCreada, onEditarMateria }) {
     const [materias, setMaterias] = useState([])

@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Alert, Box, Button, Paper, TextField, Typography } from "@mui/material"
-const API_DOCENTES = "https://sinister-cadaver-9746xrrrvqg42pvrg-3000.app.github.dev/docentes";
+const API_DOCENTES = "https://sinister-cadaver-9746xrrrvqg42pvrg-3001.app.github.dev/docentes";
 
 function FormularioD({ onDocenteCreado, docenteEditar, onCancelar }){
+     console.log("Docente seleccionado:", docenteEditar);
     const [formulario, setFormulario] = useState({
         dni: String(docenteEditar?.dni ?? ""),
         nombre: docenteEditar?.nombre ?? "",
@@ -30,6 +31,7 @@ function FormularioD({ onDocenteCreado, docenteEditar, onCancelar }){
         ...formulario,
         dni: Number(formulario.dni)
     }
+    console.log("DATOS QUE ENVÍA EL FORMULARIO:", docente);
     const editando = Boolean(docenteEditar)
     const url = editando 
                 ? `${API_DOCENTES}/${docenteEditar.dni}`

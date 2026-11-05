@@ -6,7 +6,7 @@ async function obtenerDocentes(req, res) {
 }
 
 async function obtenerDocente(req, res) {
-    const docente = await Docente.findById(req.params.id);
+    const docente = await Docente.findById(req.params.dni);
 
     if (!docente) {
         return res.status(404).json({
@@ -18,11 +18,17 @@ async function obtenerDocente(req, res) {
 }
 
 async function crearDocente(req, res) {
-    const { nombre, especialidad, correo } = req.body;
-
-    if (!nombre || !especialidad || !correo) {
+    const { dni, nombre, especialidad, correo } = req.body;
+    console.log("DATOS RECIBIDOS POR EL BACKEND:", req.body);
+    if (!dni || !nombre || !especialidad || !correo) {
         return res.status(400).json({
             mensaje: "Todos los campos son obligatorios."
+        });
+    }
+
+    if (!Number.isInteger(Number(dni))) {
+        return res.status(400).json({
+            mensaje: "El DNI debe ser un número entero."
         });
     }
 
@@ -45,6 +51,7 @@ async function crearDocente(req, res) {
     }
 
     const nuevoDocente = new Docente({
+        dni,
         nombre,
         especialidad,
         correo
@@ -56,34 +63,48 @@ async function crearDocente(req, res) {
 }
 
 async function actualizarDocente(req, res) {
-    const { nombre, especialidad, correo } = req.body;
+    try {
+        const { dni, nombre, especialidad, correo } = req.body;
 
-    const docente = await Docente.findByIdAndUpdate(
-        req.params.id,
-        {
-            nombre,
-            especialidad,
-            correo
-        },
-        {
-            returnDocument: "after"
+        const docente = await Docente.findOneAndUpdate(
+            { dni: Number(req.params.dni) },
+            { dni: Number(dni), nombre, especialidad, correo },
+            {
+                returnDocument: "after",
+                runValidators: true
+            }
+        );
+
+        if (!docente) {
+            return res.status(404).json({
+                mensaje: "Debe elegir un docente existente."
+            });
         }
-    );
 
-    if (!docente) {
-        return res.status(404).json({
-            mensaje: "Debe elegir un docente existente."
+        res.json({
+            mensaje: "Docente actualizado correctamente.",
+            docente
+        });
+
+    } catch (error) {
+        console.error("Error al actualizar docente:", error);
+
+        if (error.code === 11000) {
+            return res.status(409).json({
+                mensaje: "Ya existe un docente con ese DNI."
+            });
+        }
+
+        res.status(500).json({
+            mensaje: "Error interno del servidor."
         });
     }
-
-    res.json({
-        mensaje: "Docente actualizado correctamente.",
-        docente
-    });
 }
 
 async function eliminarDocente(req, res) {
-    const docente = await Docente.findByIdAndDelete(req.params.id);
+    const docente = await Docente.findOneAndDelete({
+        dni: Number(req.params.dni)
+    });
 
     if (!docente) {
         return res.status(404).json({

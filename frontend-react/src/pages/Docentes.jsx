@@ -18,7 +18,7 @@ return (
    <>
      
      {/* <EjemploMUI />  */}
-   <FormularioD key={docenteEditar?.DNI ?? "nuevo"}
+   <FormularioD key={docenteEditar?.dni ?? "nuevo"}
    onDocenteCreado={docenteCreado}
    docenteEditar={docenteEditar}
    onCancelar={() => setDocenteEditar(null)}

@@ -6,7 +6,7 @@ import Chip from "@mui/material/Chip"
 import Paper from "@mui/material/Paper"
 import Stack from "@mui/material/Stack"
 import Typography from "@mui/material/Typography"
-const API_DOCENTES = "https://sinister-cadaver-9746xrrrvqg42pvrg-3000.app.github.dev/docentes";
+const API_DOCENTES = "https://sinister-cadaver-9746xrrrvqg42pvrg-3001.app.github.dev/docentes";
 
 export function ListaDocentes({ actualizar, onDocenteCreado, onEditarDocente }) {
     const [docentes, setDocentes] = useState([])
@@ -14,14 +14,14 @@ export function ListaDocentes({ actualizar, onDocenteCreado, onEditarDocente }) 
     const [error, setError] = useState("")
 
     
-async function eliminarDocente(id) {
+async function eliminarDocente(dni) {
     const confirmar = window.confirm("¿Seguro que querés eliminar este docente?");
     if (!confirmar) {
         return;
     }
 
     try {
-        const respuesta = await fetch(`${API_DOCENTES}/${id}`, {
+        const respuesta = await fetch(`${API_DOCENTES}/${dni}`, {
             method: "DELETE"
         });
 
@@ -138,7 +138,7 @@ async function eliminarDocente(id) {
                                     </Button>
                                     <Button
                                         type="button"
-                                        onClick={() => eliminarDocente(docente._id)}
+                                        onClick={() => eliminarDocente(docente.dni)}
                                         variant="outlined"
                                         color="error"
                                         size="small"
