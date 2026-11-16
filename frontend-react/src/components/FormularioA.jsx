@@ -5,7 +5,7 @@ import Button from "@mui/material/Button"
 import Paper from "@mui/material/Paper"
 import TextField from "@mui/material/TextField"
 import Typography from "@mui/material/Typography"
-const API_ALUMNOS = "https://sinister-cadaver-9746xrrrvqg42pvrg-3001.app.github.dev/alumnos";
+const API_ALUMNOS = "https://sinister-cadaver-9746xrrrvqg42pvrg-3001.app.github.dev/alumnos"
 
 function FormularioA({ onAlumnoCreado, alumnoEditar, onCancelar }){
     const [formulario, setFormulario] = useState({
@@ -56,7 +56,7 @@ function FormularioA({ onAlumnoCreado, alumnoEditar, onCancelar }){
                 carrera: "",
                 correo: ""
             })
-            onAlumnoCreado()
+            onAlumnoCreado(editando ? "Modificado" : "Creado") 
         } catch (error) {
             console.error("Error al guardar:", error)
             setError(error.message || "No se pudo conectar con el servidor")

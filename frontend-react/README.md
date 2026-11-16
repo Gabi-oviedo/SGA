@@ -1,16 +1,101 @@
-# React + Vite
+# Sistema de Gestión Académica (SGA)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Proyecto desarrollado durante la materia Programación IV.
 
-Currently, two official plugins are available:
+## Descripción
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+El Sistema de Gestión Académica (SGA) es una aplicación web desarrollada como proyecto integrador de la asignatura Programación IV, correspondiente a la Tecnicatura Universitaria en Programación de la Universidad Tecnológica Nacional – Facultad Regional Reconquista.
 
-## React Compiler
+El sistema tiene como finalidad facilitar la gestión de la información académica mediante una aplicación web que permite administrar alumnos y docentes, consultar información y organizar los distintos módulos del sistema.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+El proyecto utiliza una arquitectura cliente-servidor, con un frontend desarrollado en React y un backend basado en Node.js y Express, conectado a una base de datos MongoDB.
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Objetivos
+
+- Desarrollar una aplicación web completa.
+
+- Implementar operaciones CRUD para la gestión de alumnos y docentes.
+
+- Integrar frontend y backend mediante una API REST.
+
+- Gestionar la información utilizando una base de datos no relacional.
+
+- Incorporar autenticación de usuarios.
+
+- Aplicar buenas prácticas de organización y separación de responsabilidades.
+
+- Utilizar Git y GitHub para el control de versiones y el trabajo colaborativo.
+
+
+## Tecnologías
+
+### Frontend
+
+- React.
+
+- Vite.
+
+- JavaScript.
+
+- React Router DOM.
+
+- Material UI (MUI).
+
+- CSS.
+
+### Backend
+
+- Node.js.
+
+- Express.
+
+- JavaScript.
+
+- Mongoose.
+
+- bcrypt.
+
+- jsonwebtoken (JWT).
+
+### Base de datos
+
+- MongoDB.
+
+## Funcionalidades implementadas
+
+### Interfaz de usuario
+
+- Navegación mediante React Router DOM.
+
+- Estructura de diseño compartida mediante componentes.
+
+- Header y Footer.
+
+- Páginas de Inicio, Alumnos, Docentes y Ayuda.
+
+- Estilos y componentes de interfaz utilizando Material UI.
+
+- Organización de componentes y páginas.
+
+### Autenticación
+
+- Modelo de usuarios en MongoDB.
+
+- Almacenamiento de contraseñas mediante hash con bcrypt.
+
+- Login mediante email y contraseña.
+
+- Validación de credenciales en el backend.
+
+- Generación de tokens JWT después de validar el usuario.
+
+- Recepción y almacenamiento del token en el frontend.
+
+
+
+## Autor
+
+Gabriel Oviedo
+
+Programación IV

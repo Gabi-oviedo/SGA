@@ -1,38 +1,32 @@
+const mongoose = require("mongoose")
+const bcrypt = require("bcrypt")
+require("dotenv").config()
 
-const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
-require("dotenv").config();
+const Usuario = require("./models/Usuario")
 
-const Usuario = require("./models/Usuario");
+async function crearUsuario() {
+   try {
+    await mongoose.connect(process.env.MONGO_URI)
+    const email = "admin@sga.com"
+    const password = "ClaveDePrueba123!"
 
-async function actualizarAdmin() {
-    try {
-        await mongoose.connect(process.env.MONGO_URI);
+    const hash = await bcrypt.hash(password, 10)
 
-        const email = "admin@sga.com";
-        const password = "ClaveDePrueba123!";
+    const usuario = new Usuario({
+        nombre: "Administrador de prueba",
+        email: email,
+        password: hash,
+        rol: "admin"
+    })
+    await usuario.save() // Guardar el usuario en la base de datos
 
-        const hash = await bcrypt.hash(password, 10);
-
-        const usuario = await Usuario.findOneAndUpdate(
-            { email },
-            { password: hash },
-            { new: true }
-        );
-
-        if (!usuario) {
-            console.log("No se encontró el administrador.");
-            return;
-        }
-
-        console.log("Contraseña del administrador actualizada.");
-
-    } catch (error) {
-        console.error("Error:", error.message);
-    } finally {
-        await mongoose.disconnect();
-    }
+    console.log("Usuario de prueba creado correctamente")
+    console.log("Email:", email)
+   } catch (error) {
+    console.error("Error al crear el usuario: ", error.message)
+   } finally {
+    await mongoose.disconnect()
+   }
 }
 
-actualizarAdmin();
-
+crearUsuario()
