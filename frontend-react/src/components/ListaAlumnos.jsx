@@ -6,7 +6,7 @@ import Chip from "@mui/material/Chip"
 import Paper from "@mui/material/Paper"
 import Stack from "@mui/material/Stack"
 import Typography from "@mui/material/Typography"
-const API_ALUMNOS = "http://localhost:3000/alumnos"
+const API_ALUMNOS = "https://sinister-cadaver-9746xrrrvqg42pvrg-3001.app.github.dev/alumnos"
 import { useAuth } from "../context/useAuth"
 
 export function ListaAlumnos({ actualizar, onAlumnoCreado, onEditarAlumno }) {

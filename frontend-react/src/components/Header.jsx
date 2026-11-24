@@ -100,6 +100,15 @@ export default function Header() {
                         </Link>
                         <Link
                             component={RouterLink}
+                            to="/materias"
+                            color="text.primary"
+                            underline="none"
+                            sx={{ px: { xs: 1, sm: 1.5 }, py: 1, borderRadius: 2, "&:hover": { bgcolor: "action.hover" } }}
+                        >
+                            Materias
+                        </Link>
+                        <Link
+                            component={RouterLink}
                             to="/docentes"
                             color="text.primary"
                             underline="none"
@@ -122,9 +131,9 @@ export default function Header() {
                             variant="outlined"
                             onClick={logout}
                             sx={{ textTransform: "none", fontWeight: 600 }}
-                            >
-                                Cerrar sesión
-                            </Button>
+                        >
+                            Cerrar sesión
+                        </Button>
                         <SelectorTema />
                     </Stack>
                 </Toolbar>

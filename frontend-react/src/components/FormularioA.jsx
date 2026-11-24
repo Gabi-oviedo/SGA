@@ -5,7 +5,7 @@ import Button from "@mui/material/Button"
 import Paper from "@mui/material/Paper"
 import TextField from "@mui/material/TextField"
 import Typography from "@mui/material/Typography"
-const API_ALUMNOS = "http://localhost:3000/alumnos"
+const API_ALUMNOS = "https://sinister-cadaver-9746xrrrvqg42pvrg-3001.app.github.dev/alumnos"
 import { useAuth } from "../context/useAuth";
 
 function FormularioA({ onAlumnoCreado, alumnoEditar, onCancelar }){

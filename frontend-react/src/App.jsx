@@ -1,10 +1,10 @@
 import Alumnos from "./pages/Alumnos";
-import { FAQ } from "./pages/FAQ";
+import  FAQ  from "./pages/FAQ";
 import { Routes, Route } from "react-router-dom";
-import LayoutPpal from "./layouts/LayoutPpal";
+import LayoutPpal from "./components/LayoutPpal";
 import Inicio from "./pages/Inicio";
 import Docentes from "./pages/Docentes";
-import Materias from ".pages/Materias";
+import Materias from "./pages/Materias";
 import Login from "./pages/Login";
 import RutaProtegida from "./components/RutaProtegida";
 
